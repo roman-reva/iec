@@ -1,0 +1,24 @@
+[16-Mar-2015 19:14:36 Asia/Yekaterinburg] PHP Strict Standards:  Only variables should be passed by reference in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/index.php on line 521
+[16-Mar-2015 19:14:36 Asia/Yekaterinburg] PHP Notice:  Undefined index: 0x829A in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 853
+[16-Mar-2015 19:14:36 Asia/Yekaterinburg] PHP Notice:  Undefined variable: mp in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 1201
+[09-Apr-2015 20:54:13 Asia/Yekaterinburg] PHP Strict Standards:  Only variables should be passed by reference in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/index.php on line 521
+[09-Apr-2015 20:54:13 Asia/Yekaterinburg] PHP Notice:  Undefined index: 0x829A in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 853
+[09-Apr-2015 20:54:13 Asia/Yekaterinburg] PHP Notice:  Undefined variable: mp in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 1201
+[25-Jun-2015 21:17:55 Asia/Yekaterinburg] PHP Strict Standards:  Only variables should be passed by reference in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/index.php on line 521
+[25-Jun-2015 21:17:55 Asia/Yekaterinburg] PHP Notice:  Undefined index: 0x829A in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 853
+[25-Jun-2015 21:17:55 Asia/Yekaterinburg] PHP Notice:  Undefined variable: mp in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 1201
+[25-Jun-2015 21:35:12 Asia/Yekaterinburg] PHP Strict Standards:  Only variables should be passed by reference in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/index.php on line 521
+[25-Jun-2015 21:35:12 Asia/Yekaterinburg] PHP Notice:  Undefined index: 0x829A in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 853
+[25-Jun-2015 21:35:12 Asia/Yekaterinburg] PHP Notice:  Undefined variable: mp in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 1201
+[25-Jun-2015 21:36:52 Asia/Yekaterinburg] PHP Strict Standards:  Only variables should be passed by reference in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/index.php on line 521
+[25-Jun-2015 21:36:52 Asia/Yekaterinburg] PHP Notice:  Undefined index: 0x829A in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 853
+[25-Jun-2015 21:36:52 Asia/Yekaterinburg] PHP Notice:  Undefined variable: mp in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 1201
+[25-Jun-2015 21:37:08 Asia/Yekaterinburg] PHP Strict Standards:  Only variables should be passed by reference in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/index.php on line 521
+[25-Jun-2015 21:37:08 Asia/Yekaterinburg] PHP Notice:  Undefined index: 0x829A in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 853
+[25-Jun-2015 21:37:08 Asia/Yekaterinburg] PHP Notice:  Undefined variable: mp in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 1201
+[26-Jun-2015 18:59:26 Asia/Yekaterinburg] PHP Strict Standards:  Only variables should be passed by reference in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/index.php on line 521
+[26-Jun-2015 18:59:26 Asia/Yekaterinburg] PHP Notice:  Undefined index: 0x829A in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 853
+[26-Jun-2015 18:59:26 Asia/Yekaterinburg] PHP Notice:  Undefined variable: mp in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 1201
+[26-Jun-2015 19:27:19 Asia/Yekaterinburg] PHP Strict Standards:  Only variables should be passed by reference in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/index.php on line 521
+[26-Jun-2015 19:27:19 Asia/Yekaterinburg] PHP Notice:  Undefined index: 0x829A in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 853
+[26-Jun-2015 19:27:19 Asia/Yekaterinburg] PHP Notice:  Undefined variable: mp in /home/u2288/public_html/tinymce/jscripts/tiny_mce/plugins/images/connector/php/exifReader.php on line 1201

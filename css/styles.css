@@ -1,0 +1,128 @@
+BODY {
+	background-color: #4D4D4D;
+	padding: 0;
+	color: #C0C0C0;
+	font-family: verdana;
+	font-size: 12px;
+}
+div.menubutton {
+	background-color: #E5E5E5;
+	width: 200px;
+	height: 16px;
+	background-image: url('../images/menucatgrad.gif');
+	color: #395EA7;
+	font-family: verdana;
+	font-size: 12px;
+	padding: 3px;
+	padding-left: 20px;
+	font-weight: bold;
+}
+div.menubutton_sel {
+	background-color: #E5E5E5;
+	width: 200px;
+	height: 16px;
+	background-image: url('../images/menucatgrad_sel.gif');
+	color: #395EA7;
+	font-family: verdana;
+	font-size: 12px;
+	padding: 3px;
+	padding-left: 20px;
+	font-weight: bold;
+}
+div.submenu {
+	background-color: #F7F7F7;
+	width: 190px;
+	background-image: url('../images/menucatshadow.gif');
+	background-repeat: repeat-x;
+	padding: 3px;
+	padding-left: 30px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+div.undermenu {
+	background-color: #F7F7F7;
+	width: 223px;
+	height: 200px;
+	background-image: url('../images/undermenubg.gif');
+	background-repeat: repeat-x;
+}
+div.menu_spacers {
+	width: 220px;
+	height: 1px;
+}
+a.submenulink {
+	color: #386FDD;
+	font-family: verdana;
+	font-size: 11px;
+	text-decoration: none;
+	font-weight: normal;
+}
+a.submenulink_sel {
+	color: #EE0000;
+	font-family: verdana;
+	font-size: 11px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.menulink {
+	color: #395EA7;
+	font-family: verdana;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+}
+a.menulink:hover {
+	color: #395EA7;
+	font-family: verdana;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+a.group_header {
+	color: #395EA7;
+	font-family: verdana;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+a.group_header:hover {
+	color: #395EA7;
+	font-family: verdana;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.grouptext {
+	color: #707070;
+	font-family: verdana;
+	font-size: 11px;
+	font-weight: normal;
+	text-decoration: none;
+}
+.header {
+	color: #7070AA;
+	font-family: verdana;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+.header0 {
+	color: #7070AA;
+	font-family: verdana;
+	font-size: 18px;
+	font-weight: bold;
+	text-decoration: none;
+}
+.tabtext {
+	color: #707070;
+	font-family: verdana;
+	font-size: 11px;
+	font-weight: bold;
+	text-decoration: none;
+  padding-left:4px;
+  padding-right:4px;
+}
+div.tab {
+ 	float:left;
+}

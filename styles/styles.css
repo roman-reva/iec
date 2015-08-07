@@ -1,0 +1,193 @@
+body {
+	background-image: url('../images/bg.jpg');	
+	background-color: #505050;
+	margin: 0px 0px 0px 0px;
+}
+
+div.content {
+	width: 1000px;
+	background-color: #656565;
+	margin: 0 auto;
+	padding: 3px;
+}
+
+div.headtopgrad {
+	width: 1000px;
+	height: 29px;
+	background-image: url('../images/headtopgrad.gif');
+	padding: 0px;
+}
+
+div.header {
+	width: 1000px;
+	height: 90px;
+	background-image: url('../images/header_grad.gif');
+	padding: 0px;
+}
+
+div.headbotgrad {
+	width: 1000px;
+	height: 25px;
+	background-image: url('../images/headbotgrad.gif');
+	padding: 0px;
+}
+
+div.copyrights {
+	width: 1000px;
+	height: 25px;
+	background-image: url('../images/header_grad.gif');
+	padding: 0px;
+	color: #FFFFFF;
+	font-family: arial;
+	font-size: 11px;
+	text-align: center;
+	line-height: 25px;
+}
+
+div.greyline {
+	width: 1000px;
+	height: 1px;
+}
+
+div.button {
+	width: 1000px;
+	height: 3px;
+}
+
+table.main {
+	width: 100%;
+	border: 0px;
+	background-color: #F7F7F7;
+}
+
+td.menu {
+	width: 200px;
+	height: 100px;
+	vertical-align: top;
+}
+div.menuitem {
+	background-color: #EFEFEF;
+	width: 177px;
+	background-image: url('../images/menucatgrad.gif');
+	background-repeat: repeat-x;
+	padding: 3px;
+	padding-left: 20px;
+}
+div.openmenuitem {
+	background-color: #F5F5F5;
+	width: 167px;
+	background-image: url('../images/menucatshadow.gif');
+	background-repeat: repeat-x;
+	padding-right: 3px;
+	padding-left: 30px;
+	padding-top: 7px;
+	padding-bottom: 10px;
+}
+a.menulink, a.menulink_sel {
+	font-family: verdana;
+	font-size: 12px;
+	font-weight: bold;
+	color: #395EA7;
+	text-decoration: none;
+}
+a.menulink:hover {
+	font-family: verdana;
+	font-size: 12px;
+	font-weight: bold;
+	color: #597EC7;
+	text-decoration: none;	
+}
+a.menulink_sel {
+	color: #404040;	
+}
+
+div.undermenubg {
+	width: 200px;
+	height:220px;
+	background-image: url('../images/undermenubg.gif');	
+}
+td.undermenu {
+	width: 200px;
+	background-color: #F7F7F7;
+}
+
+td.text, td.tabstext {
+	background-color: #FFFFFF;
+	font-family: arial;
+	font-size: 12px;
+	vertical-align: top;
+	padding: 15px 10px 5px 15px;
+}
+
+td.tabstext {
+	background-color: #FFFFFF;
+	font-family: arial;
+	font-size: 12px;
+	vertical-align: top;
+	padding: 0px 0px 0px 0px;	
+}
+
+.pagetitle{
+	color: #395EA7;
+	font-family: verdana;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.categorytitle {
+	/*color: #7070AA;*/
+	color: #404040;
+	font-family: verdana;
+	font-size: 18px;
+	font-weight: bold;
+	text-decoration: none;	
+	padding-bottom: 10px;
+	text-align: center;
+}
+a.groupheader {
+	color: #395EA7;
+	font-family: verdana;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+a.groupheader:hover {
+	color: #395EA7;
+	font-family: verdana;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+a.submenulink {
+	color: #386FDD;
+	font-family: verdana;
+	font-size: 11px;
+	text-decoration: none;
+	font-weight: normal;
+}
+a.submenulink:hover {
+	color: #58AFFF;
+	font-family: verdana;
+	font-size: 11px;
+	text-decoration: none;
+	font-weight: normal;
+}
+a.submenulink_sel {
+	color: #EE0000;
+	font-family: verdana;
+	font-size: 11px;
+	text-decoration: none;
+}
+.tabtext {
+	color: #707070;
+	font-family: verdana;
+	font-size: 11px;
+	font-weight: bold;
+	text-decoration: none;
+	padding-left:4px;
+	padding-right:4px;
+}
+div.tab {
+ 	float:left;
+}

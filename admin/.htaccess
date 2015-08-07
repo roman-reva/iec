@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "admin"
+AuthUserFile "/home/u2288/.htpasswds/public_html/admin/passwd"
+require valid-user
