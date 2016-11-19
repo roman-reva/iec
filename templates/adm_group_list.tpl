@@ -9,7 +9,8 @@
 <table cellspacing="1" cellpadding="2" bgcolor="#D0D0D0">
 	<tr>
 		<th>ID</th>
-		<th>Название проекта</th>
+		<th>Название проекта (RU)</th>
+		<th>Название проекта (EN)</th>
 		<!--  th>Вес</th -->
 		<th width="60"></th>
 	</tr>
@@ -21,7 +22,8 @@
 		{foreach from=$data item=item}
 		<tr>
 			<td class="tbl">{$item.id}</td>
-			<td class="tbl">{$item.name}</td>
+			<td class="tbl">{$item.name_ru}</td>
+			<td class="tbl">{$item.name_en}</td>
 			<!--td class="tbl">{$item.weight}</td-->
 			<td class="tbl" align="center">
 	      <a href="page_order.php?gid={$item.id}"><img src='../images/b_order.png' title="Порядок" border="0"></a>

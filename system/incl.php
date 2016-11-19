@@ -11,6 +11,7 @@
     $smarty->compile_dir   = HOMEDIR.'/templates_c';
     $smarty->config_dir    = HOMEDIR.'/configs';
     $smarty->cache_dir     = HOMEDIR.'/cache';
-    $smarty->caching  	 = false; 	
+    $smarty->caching  	 = false;
 
+    $_SESSION['lang'] = isset($_SESSION['lang']) ? $_SESSION['lang'] : 'en';
 ?>

@@ -9,7 +9,8 @@
 <table cellspacing="1" cellpadding="1" bgcolor="#D0D0D0">
 	<tr>
 		<th>ID</th>
-		<th>Название тематики</th>
+		<th>Название тематики (RU)</th>
+		<th>Название тематики (EN)</th>
 		<th>Вес</th>
 		<th width="60"></th>
 	</tr>
@@ -21,7 +22,8 @@
 		{foreach from=$data item=item}
 		<tr>
 			<td class="tbl">{$item.id}</td>
-			<td class="tbl">{$item.name}</td>
+			<td class="tbl">{$item.name_ru}</td>
+			<td class="tbl">{$item.name_en}</td>
 			<td class="tbl">{$item.weight}</td>
 			<td class="tbl" align="center">
 		  <a href="category_rel.php?id={$item.id}"><img src='../images/b_rel.png' title="Связи" border="0"></a>

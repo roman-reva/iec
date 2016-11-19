@@ -45,7 +45,8 @@
 <table cellspacing="1" cellpadding="2" bgcolor="#D0D0D0">
 	<tr>
 		<th>ID</th>
-		<th>Заголовок материала</th>
+		<th>Заголовок материала (RU)</th>
+		<th>Заголовок материала (EN)</th>
 		<th>Тип материала</th>
 		<th width="60"></th>
 	</tr>
@@ -60,7 +61,11 @@
 			<td class="tbl">{$item.id}</td>
 			<td class="tbl">
 				<img src="/images/attention.png" width="13" height="13" title="Данный материал не привязан ни к одному проекту" />
-				{$item.title}
+				{$item.title_ru}
+			</td>
+			<td class="tbl">
+				<img src="/images/attention.png" width="13" height="13" title="Данный материал не привязан ни к одному проекту" />
+				{$item.title_en}
 			</td>
 			<td class="tbl">{$item.page_type}</td>
 			<td class="tbl" align="center">
@@ -80,7 +85,8 @@
 		{foreach from=$data item=item}
 		<tr>
 			<td class="tbl">{$item.id}</td>
-			<td class="tbl">{$item.title}</td>
+			<td class="tbl">{$item.title_ru}</td>
+			<td class="tbl">{$item.title_en}</td>
 			<td class="tbl">{$item.page_type}</td>
 			<td class="tbl" align="center">
 	      	  <a href="page_rel.php?id={$item.id}"><img src='../images/b_rel.png' title="Связи" border="0"></a>

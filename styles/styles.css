@@ -191,3 +191,13 @@ a.submenulink_sel {
 div.tab {
  	float:left;
 }
+div.lang_switcher {
+    text-align: right;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+.lang_switcher button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}

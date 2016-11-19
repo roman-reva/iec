@@ -16,8 +16,10 @@
 
 	$q = "SELECT 
 			p.id AS id,
-			p.title AS title,
-			p.menutitle AS menutitle,
+			p.title_ru AS title_ru,
+			p.title_en AS title_en,
+			p.menutitle_ru AS menutitle_ru,
+			p.menutitle_en AS menutitle_en,
 			p.weight AS weight
 		  FROM 
 		  	infopage AS p 

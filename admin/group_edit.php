@@ -12,20 +12,23 @@ $smarty->assign("weights", $weights);
 // if submit button was pressed
 if (isset($_POST['sent'])) {
 	$id = prep($_POST['id']);
-	$name = prep($_POST['name']);
-	$details = prep($_POST['details']);
-	$text = prep($_POST['text']);
+	$name_ru = prep($_POST['name_ru']);
+	$details_ru = prep($_POST['details_ru']);
+	$text_ru = prep($_POST['text_ru']);
+	$name_en = prep($_POST['name_en']);
+	$details_en = prep($_POST['details_en']);
+	$text_en = prep($_POST['text_en']);
 
 	// validation
-	if (empty($name)) {
+	if (empty($name_ru) || empty($name_en)) {
 		$errors[] = "Название не может быть пустым!";
 	}
 	// validation
-	if (empty($details)) {
+	if (empty($details_ru) || empty($details_en)) {
 		$errors[] = "Краткое описание не может быть пустым!";
 	}
 	
-	if (empty($text)) {
+	if (empty($text_ru) || empty($text_en)) {
 		$errors[] = "Полное описание не может быть пустым!";
 	}
 
@@ -54,10 +57,13 @@ if (isset($_POST['sent'])) {
 			$edit = true;
 		}
 		$data['id'] = $_POST['id'];
-		$data['details'] = $_POST['details'];
-		$data['file'] = $path;		
-		$data['text'] = $_POST['text'];
-		$data['name'] = str_replace("\\'", "'", $_POST['name']);
+		$data['details_ru'] = $_POST['details_ru'];
+        $data['text_ru'] = $_POST['text_ru'];
+        $data['name_ru'] = str_replace("\\'", "'", $_POST['name_ru']);
+        $data['details_en'] = $_POST['details_en'];
+        $data['text_en'] = $_POST['text_en'];
+        $data['name_en'] = str_replace("\\'", "'", $_POST['name_en']);
+        $data['file'] = $path;
 		$smarty->assign("data", $data);
 
 		$smarty->assign("errors", $errors);
@@ -65,20 +71,26 @@ if (isset($_POST['sent'])) {
 		// database modifications
 		if ($id>0) {
 			$q = "UPDATE `$table` SET
-        	    `name`='$name',
+        	    `name_ru`='$name_ru',
+        	    `name_en`='$name_en',
               `image`='$path',
-              `details`='$details',
-              `text`='$text'
+              `details_ru`='$details_ru',
+              `details_en`='$details_en',
+              `text_ru`='$text_ru',
+              `text_en`='$text_en'
 	            WHERE `id`='$id'";
 			
 			mq($q);
 		} else {
 			$q = "INSERT INTO `$table` SET
 	            `id`='0',
-              `details`='$details',
-              `text`='$text',
+              `name_ru`='$name_ru',
+              `name_en`='$name_en',
               `image`='$path',
-	            `name`='$name'";
+              `details_ru`='$details_ru',
+              `details_en`='$details_en',
+              `text_ru`='$text_ru',
+              `text_en`='$text_en'";
 			mq($q);
 			$id = mysql_insert_id();			
 		}
@@ -90,7 +102,7 @@ if (isset($_POST['sent'])) {
 if (isset($_GET['id'])&&count($errors)==0) {
 	$id = addslashes($_GET['id']);
 
-	$q = "SELECT * FROM `$table` WHERE id=$id ORDER BY name";
+	$q = "SELECT * FROM `$table` WHERE id=$id ORDER BY name_ru";
 	$res = mq($q);
 	$data = mysql_fetch_array($res);
 

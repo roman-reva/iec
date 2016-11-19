@@ -22,7 +22,7 @@
 	}
 	
 	
-	$q = "SELECT * FROM `page_type` ORDER BY `weight`, `name`";
+	$q = "SELECT * FROM `page_type` ORDER BY `weight`, `name_ru`";
 	$res = mq($q);
 	
 	$data = array();

@@ -40,15 +40,24 @@
 {include file="messagebar.tpl" errors=$errors message=$message}
 
 <form name="edit" action="?" method="POST" enctype="multipart/form-data">
-	<span class="head3">Название проекта</span><br />
-	<input type="text" name="name" class="short" value="{$data.name}"><br /><br />
+	<span class="head3">Название проекта (RU)</span><br />
+	<input type="text" name="name_ru" class="short" value="{$data.name_ru}"><br /><br />
 	
-	<span class="head3">Короткое описание проекта</span><br />
-	<textarea name="details" cols="80" rows="5">{$data.details}</textarea><br /><br />
+	<span class="head3">Короткое описание проекта (RU)</span><br />
+	<textarea name="details_ru" cols="80" rows="5">{$data.details_ru}</textarea><br /><br />
 	
-	<span class="head3">Полное описание проекта</span><br />
-	<textarea name="text" cols="80" rows="10">{$data.text}</textarea><br /><br />
-	
+	<span class="head3">Полное описание проекта (RU)</span><br />
+	<textarea name="text_ru" cols="80" rows="10">{$data.text_ru}</textarea><br /><br />
+
+	<span class="head3">Название проекта (EN)</span><br />
+	<input type="text" name="name_en" class="short" value="{$data.name_en}"><br /><br />
+
+	<span class="head3">Короткое описание проекта (EN)</span><br />
+	<textarea name="details_en" cols="80" rows="5">{$data.details_en}</textarea><br /><br />
+
+	<span class="head3">Полное описание проекта (EN)</span><br />
+	<textarea name="text_en" cols="80" rows="10">{$data.text_en}</textarea><br /><br />
+
 	{if $data.id>0}
 	<span class="head3">Картинка проекта</span><br />
 	{if $data.image==""}

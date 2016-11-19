@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.14, created on 2013-07-09 17:56:23
+<?php /* Smarty version 2.6.14, created on 2016-11-19 18:02:54
          compiled from header.tpl */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -10,7 +10,18 @@
 		 </head>
 	<body>
 		<div class="content">
-			<div class="headtopgrad"></div>
+			<div class="headtopgrad">
+                <div class="lang_switcher">
+                    <form action="/lang.php" method="POST">
+                        <button type="submit" name="ru" value="Русский">
+                            <img src="images/ru.png" alt="Русский"/>
+                        </button>
+                        <button type="submit" name="en" value="English">
+                            <img src="images/en.png" alt="English"/>
+                        </button>
+                    </form>
+                </div>
+            </div>
 			<div class="header"><img src="images/header.jpg" border="0" /></div>
 			<div class="headbotgrad"></div>
 			<div class="greyline"></div>

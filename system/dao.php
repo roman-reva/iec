@@ -2,15 +2,15 @@
 function fetchCategoriesFromDB() {
 	$q = "SELECT
 		          category.id AS c_id,
-		          category.name AS c_name,
-		          category.menuname AS c_menuname,
+		          category.name_{$_SESSION['lang']} AS c_name,
+		          category.menuname_{$_SESSION['lang']} AS c_menuname,
 		          group.id AS g_id,
-		          group.name AS g_name
+		          group.name_{$_SESSION['lang']} AS g_name
 		      FROM
 		          (`category` LEFT JOIN `group2category` ON category.id=group2category.id_category)
 		            LEFT JOIN `group` ON group2category.id_group=group.id
 			  ORDER BY
-		          category.weight, category.menuname, category.name, group2category.weight, group.name";
+		          category.weight, category.menuname_{$_SESSION['lang']}, category.name_{$_SESSION['lang']}, group2category.weight, group.name_{$_SESSION['lang']}";
 	$res = mq($q);
 	$category_list = array();
 
@@ -36,9 +36,9 @@ function fetchCategoriesFromDB() {
 
 function fetchInfopageMenuPart($top = true) {
 	if ($top) {
-		$q = "SELECT id AS id, menutitle AS name FROM `infopage` WHERE weight<11 ORDER BY weight";
+		$q = "SELECT id AS id, menutitle_{$_SESSION['lang']} AS name FROM `infopage` WHERE weight<11 ORDER BY weight";
 	} else {
-		$q = "SELECT id AS id, menutitle AS name FROM `infopage` WHERE weight>10 ORDER BY weight";
+		$q = "SELECT id AS id, menutitle_{$_SESSION['lang']} AS name FROM `infopage` WHERE weight>10 ORDER BY weight";
 	}
 	$res = mq($q);
 	$links = array();
@@ -95,8 +95,8 @@ function saveMenuState() {
 function getGroupsInfoByCategoryId($c_id) {
 	$q = "SELECT
 				g.id AS id,
-				g.name AS name,
-				g.details AS details,
+				g.name_{$_SESSION['lang']} AS name,
+				g.details_{$_SESSION['lang']} AS details,
 				g.image AS image
 			  FROM
 			  	`group` AS g,
@@ -123,9 +123,9 @@ function getGroupsInfoByCategoryId($c_id) {
 function getPagesInfoByGroupIdAndTypeId($g_id, $t_id = 0) {
 	$q = "SELECT
             p.id AS id,
-            p.title AS title,
-            p.details AS details,
-            pt.name AS type,
+            p.title_{$_SESSION['lang']} AS title,
+            p.details_{$_SESSION['lang']} AS details,
+            pt.name_{$_SESSION['lang']} AS type,
             pt.color AS color,
             p.update_date AS updated
           FROM
@@ -166,11 +166,11 @@ function getGroupInfoById($id) {
 function getPageInfoById($id) {
 	$q = "SELECT
             p.id AS id,
-            p.title AS title,
-            p.text AS text,
+            p.title_{$_SESSION['lang']} AS title,
+            p.text_{$_SESSION['lang']} AS text,
             p.file AS file,
             p.filename AS filename,
-            pt.name AS type,
+            pt.name_{$_SESSION['lang']} AS type,
             pt.color AS color,
             p.update_date AS updated
           FROM
@@ -190,9 +190,9 @@ function getPageInfoById($id) {
 function getInfopageById($id) {
 	$q = "SELECT
             p.id AS id,
-            p.title AS title,
+            p.title_{$_SESSION['lang']} AS title,
             p.background AS background,
-            p.text AS text           
+            p.text_{$_SESSION['lang']} AS text
           FROM
             `infopage` AS p
           WHERE
@@ -204,7 +204,7 @@ function getInfopageById($id) {
 function getTabs() {
 	$q = "SELECT
     		pt.id AS id,
-            pt.name AS name,
+            pt.name_{$_SESSION['lang']} AS name,
             pt.color AS color
           FROM
           	`page_type` AS pt
@@ -223,7 +223,7 @@ function getTabsByGroupId($gid) {
 	
 	$q = "SELECT
     		pt.id AS id,
-            pt.name AS name,
+            pt.name_{$_SESSION['lang']} AS name,
             pt.color AS color
           FROM
           	`page_type` AS pt
@@ -256,6 +256,18 @@ function getTabsByGroupId($gid) {
 function getCategoryInfoById($id) {
 	$q = "SELECT * FROM `category` WHERE id=$id";
 	$info = mysql_fetch_array(mq($q));
-	return $info;
+	return localizeObject($info);
+}
+function localizeObject($object){
+    $currentLang = $_SESSION['lang'];
+    foreach ($object as $field => $value) {
+        $parts = explode('_', $field);
+        $lang = end($parts);
+        array_pop($parts);
+        if($lang == $currentLang){
+            $object[implode('_',$parts)] = $value;
+        }
+    }
+    return $object;
 }
 ?>

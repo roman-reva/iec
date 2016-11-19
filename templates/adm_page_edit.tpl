@@ -40,19 +40,28 @@
 {include file="messagebar.tpl" errors=$errors message=$message}
 
 <form name="edit" action="?" method="POST" enctype="multipart/form-data">
-	<span class="head3">Заголовок материала</span><br />
-	<input type="text" name="title" class="long" value="{$data.title}"><br /><br />
+	<span class="head3">Заголовок материала (RU)</span><br />
+	<input type="text" name="title_ru" class="long" value="{$data.title_ru}"><br /><br />
 
-	<span class="head3">Краткое описание материала</span><br />
-	<textarea name="details" rows="8" cols="97">{$data.details}</textarea><br /><br />
+	<span class="head3">Краткое описание материала (RU)</span><br />
+	<textarea name="details_ru" rows="8" cols="97">{$data.details_ru}</textarea><br /><br />
 
-	<span class="head3">Текст материала</span><br />
-	<textarea id="elm1" name="text" rows="15" cols="97">{$data.text}</textarea><br /><br />
+	<span class="head3">Текст материала (RU)</span><br />
+	<textarea id="elm1" name="text_ru" rows="15" cols="97">{$data.text_ru}</textarea><br /><br />
 	
+	<span class="head3">Заголовок материала (EN)</span><br />
+	<input type="text" name="title_en" class="long" value="{$data.title_en}"><br /><br />
+
+	<span class="head3">Краткое описание материала (EN)</span><br />
+	<textarea name="details_en" rows="8" cols="97">{$data.details_en}</textarea><br /><br />
+
+	<span class="head3">Текст материала (EN)</span><br />
+	<textarea id="elm2" name="text_en" rows="15" cols="97">{$data.text_en}</textarea><br /><br />
+
 	<span class="head3">Тип материала</span><br />
 	<select name="page_type">
 		{foreach from=$page_type item=it}
-			<option value="{$it.id}" {if $it.id==$data.id_page_type}selected{/if}>{$it.name}</option>
+			<option value="{$it.id}" {if $it.id==$data.id_page_type}selected{/if}>{$it.name_ru}</option>
 		{/foreach}
 	</select><br /><br />
 	{if $data.id>0}

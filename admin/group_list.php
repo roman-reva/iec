@@ -27,7 +27,7 @@
 	}
 
 
-	$q = "SELECT * FROM `group` ORDER BY `name`";
+	$q = "SELECT * FROM `group` ORDER BY `name_ru`";
 	$res = mq($q);
 
 	$data = array();

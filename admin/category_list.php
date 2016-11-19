@@ -18,7 +18,7 @@
 	}
 
 
-	$q = "SELECT * FROM `category` ORDER BY `weight`, `name`";
+	$q = "SELECT * FROM `category` ORDER BY `weight`, `name_ru`";
 	$res = mq($q);
 
 	$data = array();

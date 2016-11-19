@@ -33,16 +33,16 @@
 	// project name
 	$q = "SELECT * FROM `group` WHERE id=$gid";
 	$info = mysql_fetch_array(mq($q));
-	$smarty->assign("project_name", $info['name']);
+	$smarty->assign("project_name", $info['name_ru']);
 	
 	// page types
-	$q = "SELECT * FROM page_type ORDER BY name";
+	$q = "SELECT * FROM page_type ORDER BY name_ru";
 	$res = mq($q);
 	$page_types = array(array("id" => "0", "name" => "--"));
 	while ($info = mysql_fetch_array($res)) {
 		$page_types[] = array(
 			"id" => $info['id'],
-			"name" => $info['name']	
+			"name" => $info['name_ru']
 		);
 	}
 	$smarty->assign("page_types", $page_types);
@@ -57,8 +57,8 @@
 			p2g.id AS id,
 			p2g.id_page AS page_id,
 			p2g.weight AS weight,
-			p.title AS title,
-			pt.name AS page_type
+			p.title_ru AS title,
+			pt.name_ru AS page_type
 		  FROM
 			`page2group` AS p2g,
 			`page` AS p,
@@ -70,7 +70,7 @@
 		  	pt.id = $selected_page_type 
 		  ORDER BY
 		  	p2g.weight ASC";
-	
+
 	$res = mq($q);
 	$data = array();
 	while ($info = mysql_fetch_array($res)) {

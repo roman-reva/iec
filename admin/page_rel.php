@@ -25,14 +25,14 @@ if (isset($_GET['id'])) {
 	$id = addslashes($_GET['id']);
 	$q = "SELECT
 	          category.id AS c_id,
-	          category.name AS c_name,
+	          category.name_ru AS c_name,
 	          group.id AS g_id,
-	          group.name AS g_name
+	          group.name_ru AS g_name
 	      FROM
 	          (`category` LEFT JOIN `group2category` ON category.id=group2category.id_category)
 	            LEFT JOIN `group` ON group2category.id_group=group.id
 		  ORDER BY
-	          category.name, group.name";
+	          category.name_ru, group.name_ru";
 	$res = mq($q);
 	$category_list = array();
 

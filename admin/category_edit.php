@@ -11,12 +11,14 @@ $smarty->assign("weights", $weights);
 
 if (isset($_POST['save'])) {
 	$id = prep($_POST['id']);
-	$name = prep($_POST['name']);
-	$menuname = prep($_POST['menuname']);
+    $name_ru = prep($_POST['name_ru']);
+    $name_en = prep($_POST['name_en']);
+	$menuname_ru = prep($_POST['menuname_ru']);
+	$menuname_en = prep($_POST['menuname_en']);
 	$weight = prep($_POST['weight']);
 
 	// validation
-	if (empty($name)) {
+	if (empty($name_ru) || empty($name_en)) {
 		$errors[] = "Название не может быть пустым!";
 	}
 
@@ -26,8 +28,10 @@ if (isset($_POST['save'])) {
 		}
 		$data['id'] = $_POST['id'];
 		$data['weight'] = $_POST['weight'];
-		$data['name'] = str_replace("\\'", "'", $_POST['name']);
-		$data['menuname'] = str_replace("\\'", "'", $_POST['menuname']);
+		$data['name_ru'] = str_replace("\\'", "'", $_POST['name_ru']);
+		$data['name_en'] = str_replace("\\'", "'", $_POST['name_en']);
+		$data['menuname_ru'] = str_replace("\\'", "'", $_POST['menuname_ru']);
+		$data['menuname_en'] = str_replace("\\'", "'", $_POST['menuname_en']);
 		$smarty->assign("data", $data);
 
 		$smarty->assign("errors", $errors);
@@ -35,8 +39,10 @@ if (isset($_POST['save'])) {
 		// database modifications
 		if ($id>0) {
 			$q = "UPDATE `$table` SET
-        	    	`name`='$name',
-        	    	`menuname`='$menuname',
+        	    	`name_ru`='$name_ru',
+        	    	`name_en`='$name_en',
+        	    	`menuname_ru`='$menuname_ru',
+        	    	`menuname_en`='$menuname_en',
               		`weight`='$weight'
 	              WHERE `id`='$id'";
 			mq($q);
@@ -44,8 +50,10 @@ if (isset($_POST['save'])) {
 			$q = "INSERT INTO `$table` SET
 	            	`id`='0',
               		`weight`='$weight',
-              		`menuname`='$menuname',
-	            	`name`='$name'";
+              		`name_ru`='$name_ru',
+        	    	`name_en`='$name_en',
+        	    	`menuname_ru`='$menuname_ru',
+        	    	`menuname_en`='$menuname_en'";
 			mq($q);
 			$id = mysql_insert_id();
 		}

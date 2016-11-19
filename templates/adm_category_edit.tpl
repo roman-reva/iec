@@ -40,12 +40,18 @@
 {include file="messagebar.tpl" errors=$errors message=$message}
 
 <form name="edit" action="?" method="POST"  enctype="multipart/form-data">
-	<span class="head3">Название тематики:</span><br />
-	<input type="text" name="name" class="short" value="{$data.name}"><br /><br />
+	<span class="head3">Название тематики (RU):</span><br />
+	<input type="text" name="name_ru" class="short" value="{$data.name_ru}"><br /><br />
 
-	<span class="head3">Название тематики в меню:</span><br />
-	<input type="text" name="menuname" class="short" value="{$data.menuname}"><br /><br />
-	
+	<span class="head3">Название тематики в меню (RU):</span><br />
+	<input type="text" name="menuname_ru" class="short" value="{$data.menuname_ru}"><br /><br />
+
+	<span class="head3">Название тематики (EN):</span><br />
+	<input type="text" name="name_en" class="short" value="{$data.name_en}"><br /><br />
+
+	<span class="head3">Название тематики в меню (EN):</span><br />
+	<input type="text" name="menuname_en" class="short" value="{$data.menuname_en}"><br /><br />
+
   	<span class="head3">Вес тематики:</span><br />
 	<select name="weight" value="{$data.name}">
   	{foreach from=$weights item=it}

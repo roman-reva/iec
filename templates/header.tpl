@@ -8,7 +8,18 @@
 		 </head>
 	<body>
 		<div class="content">
-			<div class="headtopgrad"></div>
+			<div class="headtopgrad">
+                <div class="lang_switcher">
+                    <form action="/lang.php" method="POST">
+                        <button type="submit" name="ru" value="Русский">
+                            <img src="images/ru.png" alt="Русский"/>
+                        </button>
+                        <button type="submit" name="en" value="English">
+                            <img src="images/en.png" alt="English"/>
+                        </button>
+                    </form>
+                </div>
+            </div>
 			<div class="header"><img src="images/header.jpg" border="0" /></div>
 			<div class="headbotgrad"></div>
 			<div class="greyline"></div>

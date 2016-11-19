@@ -31,7 +31,8 @@
 	<tr>
 		<th>Вес</th>
 		<th>ID</th>
-		<th>Заголовок материала</th>
+		<th>Заголовок материала (RU)</th>
+		<th>Заголовок материала (EN)</th>
 		<th>Тип материала</th>
 	</tr>
 	{if $nodata==true}
@@ -49,7 +50,8 @@
 				</select>
 			</td>
 			<td class="tbl">{$item.page_id}</td>
-			<td class="tbl">{$item.title}</td>
+			<td class="tbl">{$item.title_ru}</td>
+			<td class="tbl">{$item.title_en}</td>
 			<td class="tbl">{$item.page_type}</td>
 		</tr>
 		{/foreach}

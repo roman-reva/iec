@@ -40,14 +40,23 @@
 {include file="messagebar.tpl" errors=$errors message=$message}
 
 <form name="edit" action="?" method="POST"  enctype="multipart/form-data">
-	<span class="head3">Заголовок страницы</span><br />
-	<input type="text" name="title" class="long" value="{$data.title}"><br /><br />
+	<span class="head3">Заголовок страницы (RU)</span><br />
+	<input type="text" name="title_ru" class="long" value="{$data.title_ru}"><br /><br />
 	
-	<span class="head3">Заголовок страницы в меню</span><br />
-	<input type="text" name="menutitle" class="long" value="{$data.menutitle}"><br /><br />
+	<span class="head3">Заголовок страницы в меню (RU)</span><br />
+	<input type="text" name="menutitle_ru" class="long" value="{$data.menutitle_ru}"><br /><br />
 
-	<span class="head3">Текст страницы</span><br />
-	<textarea id="elm1" name="text" rows="15" cols="97">{$data.text}</textarea><br /><br />
+	<span class="head3">Текст страницы (RU)</span><br />
+	<textarea id="elm1" name="text_ru" rows="15" cols="97">{$data.text_ru}</textarea><br /><br />
+
+	<span class="head3">Заголовок страницы (EN)</span><br />
+	<input type="text" name="title_en" class="long" value="{$data.title_en}"><br /><br />
+
+	<span class="head3">Заголовок страницы в меню (EN)</span><br />
+	<input type="text" name="menutitle_en" class="long" value="{$data.menutitle_en}"><br /><br />
+
+	<span class="head3">Текст страницы (EN)</span><br />
+	<textarea id="elm2" name="text_en" rows="15" cols="97">{$data.text_en}</textarea><br /><br />
 
 	{if $data.id>0}
 	<span class="head3">Фоновое изображение страницы</span><br />

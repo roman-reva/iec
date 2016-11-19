@@ -12,13 +12,16 @@
 	// if submit button was pressed
 	if (isset($_POST['sent'])) {
 		$id = prep($_POST['id']);
-		$title = $_POST['title'];
-		$menutitle = $_POST['menutitle'];
-		$text = $_POST['text'];
+		$title_ru = $_POST['title_ru'];
+		$menutitle_ru = $_POST['menutitle_ru'];
+		$text_ru = $_POST['text_ru'];
+		$title_en = $_POST['title_en'];
+		$menutitle_en = $_POST['menutitle_en'];
+		$text_en = $_POST['text_en'];
 		$weight = $_POST['weight'];
 		
 		// validation
-		if (empty($menutitle)) {
+		if (empty($menutitle_ru) || empty($menutitle_ru)) {
 			$errors[] = "«аголовок страницы в меню не может быть пустым!";
 		}
 //		if (empty($text)) {
@@ -49,9 +52,12 @@
 				$edit = true;
 			}
 			$data['id'] = $_POST['id'];
-			$data['title'] = str_replace("\\'", "'", $_POST['title']);
-			$data['menutitle'] = str_replace("\\'", "'", $_POST['menutitle']);
-			$data['text'] = str_replace("\\'", "'", $_POST['text']);
+			$data['title_ru'] = str_replace("\\'", "'", $_POST['title_ru']);
+			$data['menutitle_ru'] = str_replace("\\'", "'", $_POST['menutitle_ru']);
+			$data['text_ru'] = str_replace("\\'", "'", $_POST['text_ru']);
+			$data['title_en'] = str_replace("\\'", "'", $_POST['title_en']);
+			$data['menutitle_en'] = str_replace("\\'", "'", $_POST['menutitle_en']);
+			$data['text_en'] = str_replace("\\'", "'", $_POST['text_en']);
 			$data['background'] = $path;
 			$data['weight'] = $_POST['weight'];
 			$smarty->assign("data", $data);
@@ -61,9 +67,12 @@
 			// database modifications
 			if ($id>0) {
 				$q = "UPDATE `$table` SET
-	        	    	`title`='$title',
-	          	    	`text`='$text',
-	          	    	`menutitle`='$menutitle',
+	        	    	`title_ru`='$title_ru',
+	          	    	`text_ru`='$text_ru',
+	          	    	`menutitle_ru`='$menutitle_ru',
+	        	    	`title_en`='$title_en',
+	          	    	`text_en`='$text_en',
+	          	    	`menutitle_en`='$menutitle_en',
 	          	    	`background`='$path',
 	            		`weight`='$weight'
   		              WHERE `id`='$id'";
@@ -73,9 +82,12 @@
 			} else {
 				$q = "INSERT INTO `$table` SET
 		            	`id`='0',
-	        	    	`title`='$title',
-	          	    	`text`='$text',
-	          	    	`menutitle`='$menutitle',
+	        	    	`title_ru`='$title_ru',
+	          	    	`text_ru`='$text_ru',
+	          	    	`menutitle_ru`='$menutitle_ru',
+	        	    	`title_en`='$title_en',
+	          	    	`text_en`='$text_en',
+	          	    	`menutitle_en`='$menutitle_en',
 	            		`background`='$path',
 	          	    	`weight`='$weight'";
 				

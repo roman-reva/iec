@@ -19,25 +19,25 @@
 	}
 	
 	// fetching page types 
-	$q = "SELECT * FROM page_type ORDER BY name";
+	$q = "SELECT * FROM page_type ORDER BY name_ru";
 	$res = mq($q);
 	$page_types = array(array("id" => "0", "name" => "--"));
 	while ($info = mysql_fetch_array($res)) {
 		$page_types[] = array(
 			"id" => $info['id'],
-			"name" => $info['name']	
+			"name" => $info['name_ru']
 		);
 	}
 	$smarty->assign("page_types", $page_types);
 	
 	// fetching projects list 
-	$q = "SELECT id, name FROM `group` ORDER BY name";
+	$q = "SELECT id, name_ru FROM `group` ORDER BY name_ru";
 	$res = mq($q);
 	$proj_list = array(array("id" => "0", "name" => "--"));
 	while ($info = mysql_fetch_array($res)) {
 		$proj_list[] = array(
 			"id" => $info['id'],
-			"name" => $info['name']	
+			"name" => $info['name_ru']
 		);
 	}
 	$smarty->assign("projects", $proj_list);
@@ -67,7 +67,7 @@
 	$filter_conditions = "";
 	$undef_filter_conditions = "";
 	if (!empty($_SESSION['f_name'])) {
-		$filter_conditions .= " AND p.title LIKE '%".$_SESSION['f_name']."%' ";
+		$filter_conditions .= " AND p.title_ru LIKE '%".$_SESSION['f_name']."%' ";
 		$undef_filter_conditions = $filter_conditions;
 	}
 	if ($_SESSION['f_type'] > 0) {
@@ -82,8 +82,9 @@
 	// fetching list of pages, which are connected to any group
 	$q = "SELECT DISTINCT
 				p.id AS id,
-				p.title AS title,
-				pt.name AS page_type
+				p.title_ru AS title_ru,
+				p.title_en AS title_en,
+				pt.name_ru AS page_type
 			  FROM 
 			  	page AS p, 
 			  	page_type AS pt,
@@ -92,7 +93,7 @@
 			  	p2g.id_page = p.id AND
 			  	pt.id = p.id_page_type 
 			  	$filter_conditions
-			  ORDER BY `title`";
+			  ORDER BY `title_ru`";
 	$res = mq($q);
 	
 	$data = array();
@@ -118,8 +119,9 @@
 		$ids = implode(", ", $undef_data_ids);
 		$q = "SELECT DISTINCT
 					p.id AS id,
-					p.title AS title,
-					pt.name AS page_type
+					p.title_ru AS title_ru,
+					p.title_en AS title_en,
+					pt.name_ru AS page_type
 				  FROM 
 				  	page AS p, 
 				  	page_type AS pt
@@ -127,7 +129,7 @@
 				  	pt.id = p.id_page_type 
 				  	$undef_filter_conditions AND
 				  	p.id IN ($ids)
-				  ORDER BY `title`";
+				  ORDER BY `title_ru`";
 	  	
 		$res = mq($q);
 		if (mysql_num_rows($res) > 0) {
@@ -136,7 +138,6 @@
 			}
 		}
 	}
-	
 	// saving data for displaying
 	if (count($data) > 0 || count($undef_data) > 0) {
 		$smarty->assign("data", $data);

@@ -41,8 +41,11 @@
 {include file="messagebar.tpl" errors=$errors message=$message}
 
 <form name="edit" action="?" method="POST">
-	<span class="head3">Название типа материала:</span><br />
-	<input type="text" name="name" class="short" value="{$data.name}"><br /><br />
+	<span class="head3">Название типа материала (RU):</span><br />
+	<input type="text" name="name_ru" class="short" value="{$data.name_ru}"><br /><br />
+
+	<span class="head3">Название типа материала (EN):</span><br />
+	<input type="text" name="name_en" class="short" value="{$data.name_en}"><br /><br />
 
 	<span class="head3">Вес типа:</span><br />
 	<select name="weight" value="{$data.name}">

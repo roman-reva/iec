@@ -12,12 +12,13 @@
 	// if submit button was pressed
 	if (isset($_POST['sent'])) {
 		$id = prep($_POST['id']);
-		$name = $_POST['name'];
+		$name_ru = $_POST['name_ru'];
+		$name_en = $_POST['name_en'];
 		$weight = prep($_POST['weight']);
 		$color = prep($_POST['color']);
 	
 		// validation
-		if (empty($name)) {
+		if (empty($name_ru) || empty($name_en)) {
 			$errors[] = "Название не может быть пустым!";
 		}
 	
@@ -28,7 +29,8 @@
 			$data['id'] = $_POST['id'];
 			$data['weight'] = $_POST['weight'];
 			$data['color'] = $_POST['color'];
-			$data['name'] = str_replace("\\'", "'", $_POST['name']);
+			$data['name_ru'] = str_replace("\\'", "'", $_POST['name_ru']);
+			$data['name_en'] = str_replace("\\'", "'", $_POST['name_en']);
 			$smarty->assign("data", $data);
 	
 			$smarty->assign("errors", $errors);
@@ -36,7 +38,8 @@
 			// database modifications
 			if ($id>0) {
 				$q = "UPDATE `$table` SET
-	        	    	`name`='$name',
+	        	    	`name_ru`='$name_ru',
+	        	    	`name_en`='$name_en',
 	                	`weight`='$weight',
 	                	`color`='$color'
 		              WHERE `id`='$id'";
@@ -45,7 +48,8 @@
 				$q = "INSERT INTO `$table` SET
 		            	`id`='0',
 	              		`weight`='$weight',
-		            	`name`='$name',
+		            	`name_ru`='$name_ru',
+	        	    	`name_en`='$name_en',
 		            	`color`='$color'";
 				mq($q);
 				$id = mysql_insert_id();
