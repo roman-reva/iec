@@ -1,36 +1,36 @@
 {include file="adm_header.tpl"} {literal}
 
-<!-- TinyMCE -->
-<script type="text/javascript"
-	src="../tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
-<script type="text/javascript">
-	tinyMCE.init({
-		// General options
-		mode : "textareas",
-		theme : "advanced",
-		plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,images,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
+	<!-- TinyMCE -->
+	<script type="text/javascript"
+			src="../tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+	<script type="text/javascript">
+		tinyMCE.init({
+			// General options
+			mode : "textareas",
+			theme : "advanced",
+			plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,images,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
 
-		// Theme options
-		theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull",
-		theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,bullist,numlist,|,undo,redo,|,link,unlink,anchor,images,cleanup,help,code,|,forecolor,backcolor",
-		theme_advanced_buttons3 : "tablecontrols,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,fullscreen",
+			// Theme options
+			theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull",
+			theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,bullist,numlist,|,undo,redo,|,link,unlink,anchor,images,cleanup,help,code,|,forecolor,backcolor",
+			theme_advanced_buttons3 : "tablecontrols,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,fullscreen",
 
-		theme_advanced_toolbar_location : "top",
-		theme_advanced_toolbar_align : "left",
-		theme_advanced_statusbar_location : "bottom",
-		theme_advanced_resizing : true,
+			theme_advanced_toolbar_location : "top",
+			theme_advanced_toolbar_align : "left",
+			theme_advanced_statusbar_location : "bottom",
+			theme_advanced_resizing : true,
 
-		// Example content CSS (should be your site CSS)
-		content_css : "css/content.css",
+			// Example content CSS (should be your site CSS)
+			content_css : "css/content.css",
 
-		// Drop lists for link/image/media/template dialogs
-		template_external_list_url : "tinymce/lists/template_list.js",
-		external_link_list_url : "tinymce/lists/link_list.js",
-		external_image_list_url : "tinymce/lists/image_list.js",
-		media_external_list_url : "tinymce/lists/media_list.js",
-	});
-</script>
-<!-- /TinyMCE -->
+			// Drop lists for link/image/media/template dialogs
+			template_external_list_url : "tinymce/lists/template_list.js",
+			external_link_list_url : "tinymce/lists/link_list.js",
+			external_image_list_url : "tinymce/lists/image_list.js",
+			media_external_list_url : "tinymce/lists/media_list.js",
+		});
+	</script>
+	<!-- /TinyMCE -->
 
 {/literal}
 
@@ -41,22 +41,22 @@
 {include file="messagebar.tpl" errors=$errors message=$message}
 
 <form name="edit" action="?" method="POST">
-	<span class="head3">Название типа материала (RU):</span><br />
+	<span class="head3">РќР°Р·РІР°РЅРёРµ С‚РёРїР° РјР°С‚РµСЂРёР°Р»Р° (RU):</span><br />
 	<input type="text" name="name_ru" class="short" value="{$data.name_ru}"><br /><br />
 
-	<span class="head3">Название типа материала (EN):</span><br />
+	<span class="head3">РќР°Р·РІР°РЅРёРµ С‚РёРїР° РјР°С‚РµСЂРёР°Р»Р° (EN):</span><br />
 	<input type="text" name="name_en" class="short" value="{$data.name_en}"><br /><br />
 
-	<span class="head3">Вес типа:</span><br />
+	<span class="head3">Р’РµСЃ С‚РёРїР°:</span><br />
 	<select name="weight" value="{$data.name}">
 		{foreach from=$weights item=it}
-		<option value='{$it}' {if $data.weight==$it}selected{/if}>{$it}</option>
+			<option value='{$it}' {if $data.weight==$it}selected{/if}>{$it}</option>
 		{/foreach}
-	</select><br /><br />	
-	
-	<input name="id" type="hidden" value="{$data.id}"> 
-	<input type="submit" name="sent" value="Сохранить"> 
-	<input type="button" onclick='location.href="page_type_list.php"' value="Назад">
+	</select><br /><br />
+
+	<input name="id" type="hidden" value="{$data.id}">
+	<input type="submit" name="sent" value="РЎРѕС…СЂР°РЅРёС‚СЊ">
+	<input type="button" onclick='location.href="page_type_list.php"' value="РќР°Р·Р°Рґ">
 
 </form><br />
 

@@ -16,7 +16,7 @@ if (isset($_GET['delproj'])) {
 $q = "SELECT id, name FROM `group` ORDER BY name";
 $fullgrouplist = array();
 $res = mq($q);
-while ($info = mysql_fetch_array($res)) {
+while ($info = mysqli_fetch_array($res)) {
 	$fullgrouplist[] = $info;
 }
 $smarty->assign("fullgrouplist", $fullgrouplist);
@@ -26,22 +26,22 @@ if (isset($_GET['id'])) {
 
 	$q = "SELECT * FROM `category` WHERE id=$id";
 	$res = mq($q);
-	$data = mysql_fetch_array($res);		
+	$data = mysqli_fetch_array($res);
 	$smarty->assign("data", $data);
-	
-	
+
+
 	if (isset($_POST['add'])) {
 		$newprojid = addslashes($_POST['newprojid']);
 		$q = "SELECT * FROM `group2category` WHERE `id_category`='$id' AND `id_group`='$newprojid'";
-		if (mysql_num_rows(mq($q))) {
-			$errors[] = "Äàííàÿ òåìàòèêà óæå ïðèâÿçàíà ê âûáðàííîìó ïðîåêòó";
+		if (mysqli_num_rows(mq($q))) {
+			$errors[] = "Ð”Ð°Ð½Ð½Ð°Ñ Ñ‚ÐµÐ¼Ð°Ñ‚Ð¸ÐºÐ° ÑƒÐ¶Ðµ Ð¿Ñ€Ð¸Ð²ÑÐ·Ð°Ð½Ð° Ðº Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½Ð¾Ð¼Ñƒ Ð¿Ñ€Ð¾ÐµÐºÑ‚Ñƒ";
 		} else {
 			$q = "INSERT INTO `group2category` SET `id_category`=$id, `id_group`=$newprojid";
 			mq($q);
-			$smarty->assign("message", "Äîáàâëåíî!");
+			$smarty->assign("message", "Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾!");
 		}
 	}
-	
+
 	if (isset($_POST['save'])) {
 		$q = "SELECT
 				g2c.id as id,
@@ -50,18 +50,18 @@ if (isset($_GET['id'])) {
 		  		`group2category` AS g2c
 		  	  WHERE
 		  	  	`id_category`='$id'";
-		
+
 		$res = mq($q);
 		$grouplist = array();
-		while ($info = mysql_fetch_array($res)) {
+		while ($info = mysqli_fetch_array($res)) {
 			$newweight = $_POST['weight_'.$info['id']];
 			$q = "UPDATE `group2category` SET `weight`='$newweight' WHERE `id`='".$info['id']."'";
 			mq($q);
 		}
-		$smarty->assign("message", "Ñîõðàíåíî!");
+		$smarty->assign("message", "Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾!");
 	}
-	
-	
+
+
 	$q = "SELECT
 			g2c.id as id,
 			g2c.weight as weight,
@@ -77,15 +77,15 @@ if (isset($_GET['id'])) {
 
 	$res = mq($q);
 	$grouplist = array();
-	while ($info = mysql_fetch_array($res)) {
+	while ($info = mysqli_fetch_array($res)) {
 		$grouplist[] = $info;
 	}
-	
+
 	$smarty->assign("errors", $errors);
 	$smarty->assign("grouplist", $grouplist);
 }
 
-$smarty->assign("page_title", "Ñâÿçè òåìàòèêè '".$data['name']."'");
+$smarty->assign("page_title", "Ð¡Ð²ÑÐ·Ð¸ Ñ‚ÐµÐ¼Ð°Ñ‚Ð¸ÐºÐ¸ '".$data['name']."'");
 
 $smarty->display("adm_category_rel.tpl");
 ?>

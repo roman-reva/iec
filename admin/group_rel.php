@@ -7,7 +7,7 @@
 	  $q = "SELECT * FROM `category` ORDER BY `name`";
 	  $res = mq($q);
 	  $category_list = array();
-	  while ($info = mysql_fetch_array($res)) {
+	  while ($info = mysqli_fetch_array($res)) {
 	    $category_list[$info['id']] = array(
 	        'id'=>$info['id'],
 	        'name'=>$info['name'],
@@ -17,7 +17,7 @@
 
     $q = "SELECT * FROM `group2category` WHERE `id_group`='$id'";
     $res = mq($q);
-    while ($info = mysql_fetch_array($res)) {
+    while ($info = mysqli_fetch_array($res)) {
 			$category_list[$info['id_category']]['checked'] = true;
     }
 
@@ -41,6 +41,6 @@
     exit;
   }
 
-	$smarty->assign("page_title", "Ñâÿçè ïðîåêòà");
+	$smarty->assign("page_title", "Ð¡Ð²ÑÐ·Ð¸ Ð¿Ñ€Ð¾ÐµÐºÑ‚Ð°");
 	$smarty->display("adm_group_rel.tpl");
 ?>

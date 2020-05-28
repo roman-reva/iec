@@ -7,7 +7,7 @@
 	cat_ids[{$numb}] = {$cid};
 	{assign var=numb value=$numb+1}
 	{/foreach}
-{literal}
+	{literal}
 	function gg(catid, grid) {
 		var val = false;
 		if (document.getElementById('box_' + catid + '_' + grid).checked) {
@@ -29,28 +29,28 @@
 
 {include file="messagebar.tpl" errors=$errors message=$message}
 
-Выберите, в каких проектах будет отображаться данный материал:<br /><br />
+Р’С‹Р±РµСЂРёС‚Рµ, РІ РєР°РєРёС… РїСЂРѕРµРєС‚Р°С… Р±СѓРґРµС‚ РѕС‚РѕР±СЂР°Р¶Р°С‚СЊСЃСЏ РґР°РЅРЅС‹Р№ РјР°С‚РµСЂРёР°Р»:<br /><br />
 
 <form name="rel" action="?" method="POST">
 
 	{foreach from=$cat_list item=it}
-  	<div class="groupbox">
-  		<span class="head3">{$it.name}</span><br />
-    	{foreach from=$it.groups item=gr}
-    	<div class="groupitem">
-	    	<input name="groups[]" onclick="gg({$it.id}, {$gr.id})" id="box_{$it.id}_{$gr.id}" type="checkbox" value="{$gr.id}" {if $gr.checked}checked{/if}> {$gr.name} <br />
-    	</div>
-    	{/foreach}
- 	</div>
-  	{/foreach}
+		<div class="groupbox">
+			<span class="head3">{$it.name}</span><br />
+			{foreach from=$it.groups item=gr}
+				<div class="groupitem">
+					<input name="groups[]" onclick="gg({$it.id}, {$gr.id})" id="box_{$it.id}_{$gr.id}" type="checkbox" value="{$gr.id}" {if $gr.checked}checked{/if}> {$gr.name} <br />
+				</div>
+			{/foreach}
+		</div>
+	{/foreach}
 
 
 
-  <div class="buttons">
-  	<input name="id" type="hidden" value="{$id}">
-		<input type="submit" name="sent" value="Сохранить">
-  	<input type="button" onclick='location.href="page_list.php"' value="Назад">
-  </div>
+	<div class="buttons">
+		<input name="id" type="hidden" value="{$id}">
+		<input type="submit" name="sent" value="РЎРѕС…СЂР°РЅРёС‚СЊ">
+		<input type="button" onclick='location.href="page_list.php"' value="РќР°Р·Р°Рґ">
+	</div>
 </form>
 
 

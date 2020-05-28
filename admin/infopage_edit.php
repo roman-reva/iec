@@ -1,131 +1,131 @@
 <?php
-	require("../system/incl.php");
+require("../system/incl.php");
 
-	$table = "infopage";
-	$errors = array();
-	$edit = false;
-	
-	$weights = array();
-  	for($i=1; $i<21; $weights[]=$i++);
-  	$smarty->assign("weights", $weights);
+$table = "infopage";
+$errors = array();
+$edit = false;
 
-	// if submit button was pressed
-	if (isset($_POST['sent'])) {
-		$id = prep($_POST['id']);
-		$title_ru = $_POST['title_ru'];
-		$menutitle_ru = $_POST['menutitle_ru'];
-		$text_ru = $_POST['text_ru'];
-		$title_en = $_POST['title_en'];
-		$menutitle_en = $_POST['menutitle_en'];
-		$text_en = $_POST['text_en'];
-		$weight = $_POST['weight'];
-		
-		// validation
-		if (empty($menutitle_ru) || empty($menutitle_ru)) {
-			$errors[] = "Çàãîëîâîê ñòðàíèöû â ìåíþ íå ìîæåò áûòü ïóñòûì!";
-		}
-//		if (empty($text)) {
-//			$errors[] = "Òåêñò ñòðàíèöû íå ìîæåò áûòü ïóñòûì!";
-//		}
-		
-		// 811x406
-		$path = "";
-		if (isset($_FILES['background'])&&$_FILES['background']['size']>0) {
-			if (!($_FILES['background']['type']=='image/gif'||$_FILES['background']['type']=='image/jpeg')) {
-				$errors[] = "Âû ìîæåòå çàãðóæàòü òîëüêî êàðòèíêè â ôîðìàòå GIF ëèáî JPEG.";
-			} else if (count($errors)==0) {
-				$filename = $_FILES['background']['name'];
-				$tmpPath = $_FILES['background']['tmp_name'];
-				$path = "data/backgrounds/".time()."_".$filename;
-					
-				move_uploaded_file($tmpPath, "../".$path);
-			}
-		} else if ($id > 0) {
-			$q = "SELECT `background` FROM `$table` WHERE id=$id";
-			$res = mq($q);
-			$data = mysql_fetch_array($res);
-			$path = $data['background'];
-		}
+$weights = array();
+for ($i = 1; $i < 21; $weights[] = $i++) ;
+$smarty->assign("weights", $weights);
 
-		if (count($errors)>0) {
-			if ($id>0) {
-				$edit = true;
-			}
-			$data['id'] = $_POST['id'];
-			$data['title_ru'] = str_replace("\\'", "'", $_POST['title_ru']);
+// if submit button was pressed
+if (isset($_POST['sent'])) {
+    $id = prep($_POST['id']);
+    $title_ru = $_POST['title_ru'];
+    $menutitle_ru = $_POST['menutitle_ru'];
+    $text_ru = $_POST['text_ru'];
+    $title_en = $_POST['title_en'];
+    $menutitle_en = $_POST['menutitle_en'];
+    $text_en = $_POST['text_en'];
+    $weight = $_POST['weight'];
+
+// validation
+    if (empty($menutitle_ru) || empty($menutitle_ru)) {
+        $errors[] = "Ð—Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ Ð² Ð¼ÐµÐ½ÑŽ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿ÑƒÑÑ‚Ñ‹Ð¼!";
+    }
+// if (empty($text)) {
+// $errors[] = "Ð¢ÐµÐºÑÑ‚ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿ÑƒÑÑ‚Ñ‹Ð¼!";
+// }
+
+// 811x406
+    $path = "";
+    if (isset($_FILES['background']) && $_FILES['background']['size'] > 0) {
+        if (!($_FILES['background']['type'] == 'image/gif' || $_FILES['background']['type'] == 'image/jpeg')) {
+            $errors[] = "Ð’Ñ‹ Ð¼Ð¾Ð¶ÐµÑ‚Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶Ð°Ñ‚ÑŒ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÐ¸ Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ GIF Ð»Ð¸Ð±Ð¾ JPEG.";
+        } else if (count($errors) == 0) {
+            $filename = $_FILES['background']['name'];
+            $tmpPath = $_FILES['background']['tmp_name'];
+            $path = "data/backgrounds/" . time() . "_" . $filename;
+
+            move_uploaded_file($tmpPath, "../" . $path);
+        }
+    } else if ($id > 0) {
+        $q = "SELECT `background` FROM `$table` WHERE id=$id";
+        $res = mq($q);
+        $data = mysqli_fetch_array($res);
+        $path = $data['background'];
+    }
+
+    if (count($errors) > 0) {
+        if ($id > 0) {
+            $edit = true;
+        }
+        $data['id'] = $_POST['id'];
+        $data['title_ru'] = str_replace("\\'", "'", $_POST['title_ru']);
 			$data['menutitle_ru'] = str_replace("\\'", "'", $_POST['menutitle_ru']);
 			$data['text_ru'] = str_replace("\\'", "'", $_POST['text_ru']);
 			$data['title_en'] = str_replace("\\'", "'", $_POST['title_en']);
-			$data['menutitle_en'] = str_replace("\\'", "'", $_POST['menutitle_en']);
-			$data['text_en'] = str_replace("\\'", "'", $_POST['text_en']);
-			$data['background'] = $path;
-			$data['weight'] = $_POST['weight'];
-			$smarty->assign("data", $data);
+        $data['menutitle_en'] = str_replace("\\'", "'", $_POST['menutitle_en']);
+        $data['text_en'] = str_replace("\\'", "'", $_POST['text_en']);
+        $data['background'] = $path;
+        $data['weight'] = $_POST['weight'];
+        $smarty->assign("data", $data);
 
-			$smarty->assign("errors", $errors);
-		} else {
-			// database modifications
-			if ($id>0) {
-				$q = "UPDATE `$table` SET
-	        	    	`title_ru`='$title_ru',
+        $smarty->assign("errors", $errors);
+    } else {
+// database modifications
+        if ($id > 0) {
+            $q = "UPDATE `$table` SET
+`title_ru`='$title_ru',
 	          	    	`text_ru`='$text_ru',
 	          	    	`menutitle_ru`='$menutitle_ru',
 	        	    	`title_en`='$title_en',
-	          	    	`text_en`='$text_en',
-	          	    	`menutitle_en`='$menutitle_en',
-	          	    	`background`='$path',
-	            		`weight`='$weight'
-  		              WHERE `id`='$id'";
-				
-				mq($q);
-				$_GET['id']=$id;
-			} else {
-				$q = "INSERT INTO `$table` SET
-		            	`id`='0',
-	        	    	`title_ru`='$title_ru',
+`text_en`='$text_en',
+`menutitle_en`='$menutitle_en',
+`background`='$path',
+`weight`='$weight'
+WHERE `id`='$id'";
+
+            mq($q);
+            $_GET['id'] = $id;
+        } else {
+            $q = "INSERT INTO `$table` SET
+`id`='0',
+`title_ru`='$title_ru',
 	          	    	`text_ru`='$text_ru',
-	          	    	`menutitle_ru`='$menutitle_ru',
+`menutitle_ru`='$menutitle_ru',
 	        	    	`title_en`='$title_en',
 	          	    	`text_en`='$text_en',
 	          	    	`menutitle_en`='$menutitle_en',
-	            		`background`='$path',
-	          	    	`weight`='$weight'";
-				
-				mq($q);
-				$id = mysql_insert_id();
-				$_GET['id']=$id;
-			}
-			$smarty->assign("message", "Ñîõðàíåíî!");
-		}
-	} 
-	
-	if (isset($_GET['id'])) {
-		$id = addslashes($_GET['id']);
+`background`='$path',
+`weight`='$weight'";
 
-		$q = "SELECT * FROM `$table` WHERE id=$id";
-		$res = mq($q);
-		$data = mysql_fetch_array($res);
+            mq($q);
+            $id = mysqli_insert_id();
+            $_GET['id'] = $id;
+        }
+        $smarty->assign("message", "Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾!");
+    }
+}
 
-		if (isset($_GET['delimage'])) {
-			$q = "UPDATE `$table` SET `background`='' WHERE `id`='$id'";
-			mq($q);
-			if (is_file("../".$data['background'])) {
-				unlink("../".$data['background']);
-			}
-			unset($data['background']);
-			$smarty->assign("message", "Ôîíîâîå èçîáðàæåíèå ñòðàíèöû óäàëåíî!");
-		}
-		
-		$smarty->assign("data", $data);
+if (isset($_GET['id'])) {
+    $id = addslashes($_GET['id']);
 
-		$edit = true;
-	}
+    $q = "SELECT * FROM `$table` WHERE id=$id";
+    $res = mq($q);
+    $data = mysqli_fetch_array($res);
 
-	if ($edit) {
-		$smarty->assign("page_title", "Ðåäàêòèðîâàòü ñòðàíèöó");
-	} else {
-		$smarty->assign("page_title", "Íîâàÿ ñòðàíèöà");
-	}
+    if (isset($_GET['delimage'])) {
+        $q = "UPDATE `$table` SET `background`='' WHERE `id`='$id'";
+        mq($q);
+        if (is_file("../" . $data['background'])) {
+            unlink("../" . $data['background']);
+        }
+        unset($data['background']);
+        $smarty->assign("message", "Ð¤Ð¾Ð½Ð¾Ð²Ð¾Ðµ Ð¸Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¾!");
+    }
 
-	$smarty->display("adm_infopage_edit.tpl");
+    $smarty->assign("data", $data);
+
+    $edit = true;
+}
+
+if ($edit) {
+    $smarty->assign("page_title", "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñƒ");
+} else {
+    $smarty->assign("page_title", "ÐÐ¾Ð²Ð°Ñ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ð°");
+}
+
+$smarty->display("adm_infopage_edit.tpl");
 ?>

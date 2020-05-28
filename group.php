@@ -17,14 +17,15 @@ if (isset($_GET['id'])&&isset($_GET['cid'])) {
 	$cid = addslashes($_GET['cid']);
 	$category = getCategoryInfoById($cid);
 	$smarty->assign("category", $category);
-	
+
+    $smarty->assign("pagelist", []);
+
 	if (isset($_GET['tid'])) {
 		$tid = addslashes($_GET['tid']);
 		$smarty->assign("selected_tab", $tid);
-		
 		if ($tid>0) {
-			$pagelist = getPagesInfoByGroupIdAndTypeId($id, $tid);
-			$smarty->assign("pagelist", $pagelist);
+            $pagelist = getPagesInfoByGroupIdAndTypeId($id, $tid);
+            $smarty->assign("pagelist", $pagelist);
 		}	
 	}
 } else {

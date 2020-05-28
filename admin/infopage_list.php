@@ -1,38 +1,38 @@
 <?php
-	require("../system/incl.php");
+require("../system/incl.php");
 
-	$errors = array();
-	if (isset($_GET['del'])) {
-		$q = "SELECT * FROM `infopage`";
-		if (mysql_numrows(mq($q))==1) {
-			$errors[] = "Невозможно удалить страницу! Как минимум одна страница должна присутствовать на сайте!";
-		}
-		
-	  	$del = addslashes($_GET['del']);
-	   	$q = "DELETE FROM `infopage` WHERE `id`='$del'";
-	    mq($q);
-	    $smarty->assign("message", "Удалено!");
-	}
+$errors = array();
+if (isset($_GET['del'])) {
+    $q = "SELECT * FROM `infopage`";
+    if (mysql_numrows(mq($q)) == 1) {
+        $errors[] = "?????????? ??????? ????????! ??? ??????? ???? ???????? ?????? ?????????????? ?? ?????!";
+    }
 
-	$q = "SELECT 
-			p.id AS id,
-			p.title_ru AS title_ru,
+    $del = addslashes($_GET['del']);
+    $q = "DELETE FROM `infopage` WHERE `id`='$del'";
+    mq($q);
+    $smarty->assign("message", "???????!");
+}
+
+$q = "SELECT
+p.id AS id,
+p.title_ru AS title_ru,
 			p.title_en AS title_en,
-			p.menutitle_ru AS menutitle_ru,
+p.menutitle_ru AS menutitle_ru,
 			p.menutitle_en AS menutitle_en,
-			p.weight AS weight
-		  FROM 
-		  	infopage AS p 
-		  ORDER BY 
-		  	weight";
-	$res = mq($q);
+p.weight AS weight
+FROM
+infopage AS p
+ORDER BY
+weight";
+$res = mq($q);
 
-	$data = array();
-	while($info = mysql_fetch_array($res)) {
-		$data[] = $info;
-	}
-	
-	$smarty->assign("data", $data);
+$data = array();
+while ($info = mysqli_fetch_array($res)) {
+    $data[] = $info;
+}
 
-	$smarty->display("adm_infopage_list.tpl");
+$smarty->assign("data", $data);
+
+$smarty->display("adm_infopage_list.tpl");
 ?>

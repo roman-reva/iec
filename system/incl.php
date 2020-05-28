@@ -14,4 +14,5 @@
     $smarty->caching  	 = false;
 
     $_SESSION['lang'] = isset($_SESSION['lang']) ? $_SESSION['lang'] : 'en';
+    $smarty->assign('lang', $_SESSION['lang']);
 ?>

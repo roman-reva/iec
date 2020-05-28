@@ -7,13 +7,13 @@
 		$q = "SELECT * FROM `group2category` WHERE `id_category`='$del'";
 		$res = mq($q);
 		
-		if (mysql_num_rows($res)>0) {			
-			$error = array("Íåâîçìîæíî óäàëèòü âûáðàííóþ êàòåãîðèþ, òàê êàê ñóùåñòâóþò ãðóïïû, ñâÿçàííûå ñ íåé.");
+		if (mysqli_num_rows($res)>0) {
+			$error = array("ÐÐµÐ²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½ÑƒÑŽ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸ÑŽ, Ñ‚Ð°Ðº ÐºÐ°Ðº ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÑŽÑ‚ Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹, ÑÐ²ÑÐ·Ð°Ð½Ð½Ñ‹Ðµ Ñ Ð½ÐµÐ¹.");
 			$smarty->assign("errors", $error);
 		} else {		
 			$q = "DELETE FROM `category` WHERE `id`='$del'";
 			mq($q);
-			$smarty->assign("message", "Óäàëåíî!");
+			$smarty->assign("message", "Ð£Ð´Ð°Ð»ÐµÐ½Ð¾!");
 		}
 	}
 
@@ -22,8 +22,8 @@
 	$res = mq($q);
 
 	$data = array();
-	if (mysql_num_rows($res) > 0) {
-		while($info = mysql_fetch_array($res)) {
+	if (mysqli_num_rows($res) > 0) {
+		while($info = mysqli_fetch_array($res)) {
 			$data[] = $info;
 		}
 	}

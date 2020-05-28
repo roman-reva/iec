@@ -7,12 +7,12 @@
 		$q = "SELECT * FROM `page2group` WHERE `id_group`='$del'";
 		$res = mq($q);
 		
-		if (mysql_num_rows($res)>0) {			
-			$error = array("Íåâîçìîæíî óäàëèòü âûáðàííûé ïðîåêò, òàê êàê ñóùåñòâóþò ìàòåðèàëû, ñâÿçàííûå ñ íèì.");
+		if (mysqli_num_rows($res)>0) {
+			$error = array("ÐÐµÐ²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½Ñ‹Ð¹ Ð¿Ñ€Ð¾ÐµÐºÑ‚, Ñ‚Ð°Ðº ÐºÐ°Ðº ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÑŽÑ‚ Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð»Ñ‹, ÑÐ²ÑÐ·Ð°Ð½Ð½Ñ‹Ðµ Ñ Ð½Ð¸Ð¼.");
 			$smarty->assign("errors", $error);
 		} else {
 			$q = "SELECT * FROM `group` WHERE `id`='$del'";
-			$data = mysql_fetch_array(mq($q));
+			$data = mysqli_fetch_array(mq($q));
 			if (!empty($data['image'])) {
 				if (is_file($data['image'])) {
 					unlink("../".$data['image']);
@@ -22,7 +22,7 @@
 			mq($q);
 			$q = "DELETE FROM `group2category` WHERE `id_group`='$del'";
 			mq($q);
-			$smarty->assign("message", "Óäàëåíî!");
+			$smarty->assign("message", "Ð£Ð´Ð°Ð»ÐµÐ½Ð¾");
 		}
 	}
 
@@ -31,8 +31,8 @@
 	$res = mq($q);
 
 	$data = array();
-	if (mysql_num_rows($res) > 0) {
-		while($info = mysql_fetch_array($res)) {
+	if (mysqli_num_rows($res) > 0) {
+		while($info = mysqli_fetch_array($res)) {
 			$data[] = $info;
 		}
 	}

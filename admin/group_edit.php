@@ -21,35 +21,46 @@ if (isset($_POST['sent'])) {
 
 	// validation
 	if (empty($name_ru) || empty($name_en)) {
-		$errors[] = "Íàçâàíèå íå ìîæåò áûòü ïóñòûì!";
+		$errors[] = "ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿ÑƒÑÑ‚Ñ‹Ð¼!";
 	}
 	// validation
 	if (empty($details_ru) || empty($details_en)) {
-		$errors[] = "Êðàòêîå îïèñàíèå íå ìîæåò áûòü ïóñòûì!";
+		$errors[] = "ÐšÑ€Ð°Ñ‚ÐºÐ¾Ðµ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ðµ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿ÑƒÑÑ‚Ñ‹Ð¼!";
 	}
 	
 	if (empty($text_ru) || empty($text_en)) {
-		$errors[] = "Ïîëíîå îïèñàíèå íå ìîæåò áûòü ïóñòûì!";
+		$errors[] = "ÐŸÐ¾Ð»Ð½Ð¾Ðµ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ðµ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿ÑƒÑÑ‚Ñ‹Ð¼!";
 	}
 
-	$path = "";
-	if (isset($_FILES['picture'])) {
-		if ($_FILES['picture']['size']>0) {
-			if (!($_FILES['picture']['type']=='image/gif'||$_FILES['picture']['type']=='image/jpeg')) {
-				$errors[] = "Âû ìîæåòå çàãðóæàòü òîëüêî êàðòèíêè â ôîðìàòå GIF ëèáî JPEG.";
-			} else if (count($errors)==0) {
-				$filename = $_FILES['picture']['name'];
-				$tmpPath = $_FILES['picture']['tmp_name'];
-				$path = "data/thumbs/".time()."_".$filename;
-					
-				move_uploaded_file($tmpPath, "../".$path);
-			}
-		}
-	} else if ($id>0) {
-		$q = "SELECT `image` FROM `$table` WHERE id=$id";
+	$path['en'] = $path['ru'] = "";
+    $pics = [];
+    foreach ($_FILES['picture'] as $field => $values) {
+        foreach ($values as $lang => $val) {
+            $pics[$lang][$field] = $val;
+        }
+    }
+
+	if (!empty($pics['en']['size']) || !empty($pics['ru']['size'])) {
+	    foreach ($pics as $lang => $pic) {
+            if ($pic['size']>0) {
+                if (!($pic['type']=='image/gif'||$pic['type']=='image/jpeg')) {
+                    $errors[] = "Ð’Ñ‹ Ð¼Ð¾Ð¶ÐµÑ‚Ðµ Ð·Ð°Ð³Ñ€ÑƒÐ¶Ð°Ñ‚ÑŒ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÐ¸ Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ GIF Ð»Ð¸Ð±Ð¾ JPEG.";
+                } else if (count($errors)==0) {
+                    $filename = $pic['name'];
+                    $tmpPath = $pic['tmp_name'];
+                    $path[$lang] = "data/thumbs/".time()."_".$filename;
+
+                    move_uploaded_file($tmpPath, "../".$path[$lang]);
+                }
+            }
+        }
+	}
+    if ($id>0) {
+		$q = "SELECT `image_en`, `image_ru` FROM `$table` WHERE id=$id";
 		$res = mq($q);
-		$data = mysql_fetch_array($res);
-		$path = $data['image'];
+		$data = mysqli_fetch_array($res);
+		$path['en'] = $path['en'] ? $path['en'] : $data['image_en'];
+		$path['ru'] = $path['ru'] ? $path['ru'] : $data['image_ru'];
 	}
 
 	if (count($errors)>0) {
@@ -73,29 +84,31 @@ if (isset($_POST['sent'])) {
 			$q = "UPDATE `$table` SET
         	    `name_ru`='$name_ru',
         	    `name_en`='$name_en',
-              `image`='$path',
+              `image_ru`='{$path['ru']}',
+              `image_en`='{$path['en']}',
               `details_ru`='$details_ru',
               `details_en`='$details_en',
               `text_ru`='$text_ru',
               `text_en`='$text_en'
 	            WHERE `id`='$id'";
-			
+
 			mq($q);
 		} else {
 			$q = "INSERT INTO `$table` SET
 	            `id`='0',
               `name_ru`='$name_ru',
               `name_en`='$name_en',
-              `image`='$path',
+              `image_ru`='{$path['ru']}',
+              `image_en`='{$path['en']}',
               `details_ru`='$details_ru',
               `details_en`='$details_en',
               `text_ru`='$text_ru',
               `text_en`='$text_en'";
 			mq($q);
-			$id = mysql_insert_id();			
+			$id = mysqli_insert_id();
 		}
 		$_GET['id'] = $id;
-		$smarty->assign("message", "Ñîõðàíåíî!");
+		$smarty->assign("message", "Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾!");
 	}
 }
 
@@ -104,17 +117,17 @@ if (isset($_GET['id'])&&count($errors)==0) {
 
 	$q = "SELECT * FROM `$table` WHERE id=$id ORDER BY name_ru";
 	$res = mq($q);
-	$data = mysql_fetch_array($res);
+	$data = mysqli_fetch_array($res);
 
 	if (isset($_GET['delimage'])) {
-		$q = "UPDATE `$table` SET `image`='' WHERE `id`='$id'";
+		$q = "UPDATE `$table` SET `image_".$_GET['delimage']."`='' WHERE `id`='$id'";
 		mq($q);
-		if (is_file("../".$data['image'])) {
-			unlink("../".$data['image']);
+		if (is_file("../".$data['image_'.$_GET['delimage']])) {
+			unlink("../".$data['image_'.$_GET['delimage']]);
 		}
-		unset($data['image']);
+		unset($data['image_'.$_GET['delimage']]);
 		
-		$smarty->assign("message", "Èçîáðàæåíèå ïðîåêòà áûëî óñïåøíî óäàëåíî!");
+		$smarty->assign("message", "Ð˜Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ Ð¿Ñ€Ð¾ÐµÐºÑ‚Ð° Ð±Ñ‹Ð»Ð¾ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¾!");
 	}
   
 	$smarty->assign("data", $data);
@@ -123,9 +136,9 @@ if (isset($_GET['id'])&&count($errors)==0) {
 }
 
 if ($edit) {
-	$smarty->assign("page_title", "Ðåäàêòèðîâàòü ïðîåêò");
+	$smarty->assign("page_title", "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¿Ñ€Ð¾ÐµÐºÑ‚");
 } else {
-	$smarty->assign("page_title", "Íîâûé ïðîåêò");
+	$smarty->assign("page_title", "ÐÐ¾Ð²Ñ‹Ð¹ Ð¿Ñ€Ð¾ÐµÐºÑ‚");
 }
 
 $smarty->display("adm_group_edit.tpl");

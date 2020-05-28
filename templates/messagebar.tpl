@@ -2,7 +2,7 @@
 	<li class="message">{$message}</li> <br />
 {/if}
 
-{if count($errors)>0}
+{if !empty($errors)}
   {foreach from=$errors item=error}
   	<li class="error"> {$error}</li>
   {/foreach}<br />

@@ -1,22 +1,24 @@
 <?php
 
-	function mq($query) {
-		$res = mysql_query($query) or die("MySQL error occures during execution of query: <br /><br /><pre>".$query."</pre><br /><br />MySQL says: <b>".mysql_error()."</b>");
-		return $res;
-	}
+function mq($query) {
+    global $conn;
+    $res = mysqli_query($conn, $query) or die("MySQL error occurred during execution of query: <br /><br /><pre>".$query."</pre><br /><br /> MySQL says: <b>".mysqli_error($conn)."</b>");
+    return $res;
+}
 
-  function prep($data) {
-   	return str_replace("'", "\'", $data);
-  }
+function prep($data) {
+    return str_replace("'", "\'", $data);
+}
 
-  function t($obj) {
-  	print_r($obj);
+function t($obj) {
+    print_r($obj);
     exit;
-  }
+}
 
+global $conn;
+$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+mysqli_select_db($conn, DB_NAME);
 
-	$conn = mysql_connect(DB_HOST, DB_USER, DB_PASS);
-	mysql_select_db(DB_NAME, $conn);
-	mq("SET NAMES `cp1251`");
+mq("SET NAMES `utf8`");
 
 ?>

@@ -1,6 +1,6 @@
-<a class="menu" href="infopage_list.php">Страницы</a><br />
-<a class="menu" href="page_list.php">Материалы</a><br />
-<a class="menu" href="category_list.php">Тематики</a><br />
-<a class="menu" href="group_list.php">Проекты</a><br />
-<a class="menu" href="page_type_list.php">Типы материала</a><br /><br /><br />
-<a class="menu" href="../">Выход [X]</a>
+<a class="menu" href="infopage_list.php">РЎС‚СЂР°РЅРёС†С‹</a><br />
+<a class="menu" href="page_list.php">РњР°С‚РµСЂРёР°Р»С‹</a><br />
+<a class="menu" href="category_list.php">РўРµРјР°С‚РёРєРё</a><br />
+<a class="menu" href="group_list.php">РџСЂРѕРµРєС‚С‹</a><br />
+<a class="menu" href="page_type_list.php">РўРёРїС‹ РјР°С‚РµСЂРёР°Р»Р°</a><br /><br /><br />
+<a class="menu" href="../">Р’С‹С…РѕРґ [X]</a>

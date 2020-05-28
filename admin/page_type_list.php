@@ -1,42 +1,42 @@
 <?php
-	require("../system/incl.php");
-	
-	if (isset($_GET['del'])) {
-		$del = addslashes($_GET['del']);
-		
-		$q = "SELECT * FROM `page_type`";
-		$num = mysql_num_rows(mq($q));
-				
-		$q = "SELECT * FROM `page` WHERE `id_page_type`='$del'";
-		$res = mq($q);
-		if ($num==1) {
-			$error = array("Âû íå ìîæåòå óäàëèòü ïîñëåäíèé òèï ìàòåðèàëà! Êàê ìèíèìóì îäèí òèï ìàòåðèàëà äîëæåí ïðèñóòñòâîâàòü!");
-			$smarty->assign("errors", $error);
-		} else if (mysql_num_rows($res)>0) {
-			$error = array("Íåâîçìîæíî óäàëèòü âûáðàííûé îáúåêò, òàê êàê ñóùåñòâóþò äðóãèå îáúåêòû, ñâÿçàííûå ñ äàííûì.");
-			$smarty->assign("errors", $error);
-		} else {		
-			$q = "DELETE FROM `page_type` WHERE `id`='$del'";
-			mq($q);
-		}
-	}
-	
-	
-	$q = "SELECT * FROM `page_type` ORDER BY `weight`, `name_ru`";
-	$res = mq($q);
-	
-	$data = array();
-	if (mysql_num_rows($res) > 0) {
-		while($info = mysql_fetch_array($res)) {
-			$data[] = $info;
-		}
-	}
-	
-	if (count($data) > 0) {
-		$smarty->assign("data", $data);
-	} else {
-		$smarty->assign("nodata", true);
-	}
-	
-	$smarty->display("adm_page_type_list.tpl");
+require("../system/incl.php");
+
+if (isset($_GET['del'])) {
+    $del = addslashes($_GET['del']);
+
+    $q = "SELECT * FROM `page_type`";
+    $num = mysqli_num_rows(mq($q));
+
+    $q = "SELECT * FROM `page` WHERE `id_page_type`='$del'";
+    $res = mq($q);
+    if ($num==1) {
+        $error = array("Ð’Ñ‹ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚Ðµ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ Ð¿Ð¾ÑÐ»ÐµÐ´Ð½Ð¸Ð¹ Ñ‚Ð¸Ð¿ Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð»Ð°! ÐšÐ°Ðº Ð¼Ð¸Ð½Ð¸Ð¼ÑƒÐ¼ Ð¾Ð´Ð¸Ð½ Ñ‚Ð¸Ð¿ Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð»Ð° Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð¿Ñ€Ð¸ÑÑƒÑ‚ÑÑ‚Ð²Ð¾Ð²Ð°Ñ‚ÑŒ!");
+        $smarty->assign("errors", $error);
+    } else if (mysqli_num_rows($res)>0) {
+        $error = array("ÐÐµÐ²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½Ñ‹Ð¹ Ð¾Ð±ÑŠÐµÐºÑ‚, Ñ‚Ð°Ðº ÐºÐ°Ðº ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÑŽÑ‚ Ð´Ñ€ÑƒÐ³Ð¸Ðµ Ð¾Ð±ÑŠÐµÐºÑ‚Ñ‹, ÑÐ²ÑÐ·Ð°Ð½Ð½Ñ‹Ðµ Ñ Ð´Ð°Ð½Ð½Ñ‹Ð¼.");
+        $smarty->assign("errors", $error);
+    } else {
+        $q = "DELETE FROM `page_type` WHERE `id`='$del'";
+        mq($q);
+    }
+}
+
+
+$q = "SELECT * FROM `page_type` ORDER BY `weight`, `name_ru`";
+$res = mq($q);
+
+$data = array();
+if (mysqli_num_rows($res) > 0) {
+    while($info = mysqli_fetch_array($res)) {
+        $data[] = $info;
+    }
+}
+
+if (count($data) > 0) {
+    $smarty->assign("data", $data);
+} else {
+    $smarty->assign("nodata", true);
+}
+
+$smarty->display("adm_page_type_list.tpl");
 ?>

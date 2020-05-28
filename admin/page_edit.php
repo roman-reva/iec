@@ -1,140 +1,140 @@
 <?php
-	require("../system/incl.php");
+require("../system/incl.php");
 
-	$table = "page";
-	$errors = array();
-	$edit = false;
+$table = "page";
+$errors = array();
+$edit = false;
 
-	// if submit button was pressed
-	if (isset($_POST['sent'])) {
-		$id = prep($_POST['id']);
-		$title_ru = prep($_POST['title_ru']);
-		$title_en = prep($_POST['title_en']);
-		$text_ru = prep($_POST['text_ru']);
+// if submit button was pressed
+if (isset($_POST['sent'])) {
+    $id = prep($_POST['id']);
+    $title_ru = prep($_POST['title_ru']);
+    $title_en = prep($_POST['title_en']);
+    $text_ru = prep($_POST['text_ru']);
 		$text_en = prep($_POST['text_en']);
 		$details_ru = prep($_POST['details_ru']);
 		$details_en = prep($_POST['details_en']);
-		$page_type = $_POST['page_type'];
-		$upd_date = time();
+    $page_type = $_POST['page_type'];
+    $upd_date = time();
 
-		// validation
-		if (empty($title_ru) || empty($title_en)) {
-			$errors[] = "Çàãîëîâîê ìàòåðèàëà íå ìîæåò áûòü ïóñòûì!";
-		}
-		if (empty($text_ru) || empty($text_en) ) {
-			$errors[] = "Òåêñò ìàòåðèàëà íå ìîæåò áûòü ïóñòûì!";
-		}
-		
-		$path = "";
-		$filename = "";
-		if (isset($_FILES['file'])) {
-			if ($_FILES['file']['size']>0) {
-				if (count($errors)==0) {
-					$filename = $_FILES['file']['name'];
-					$tmpPath = $_FILES['file']['tmp_name'];
-					$path = "data/files/".time()."_".$filename;
-						
-					move_uploaded_file($tmpPath, "../".$path) or die ("Can't move file!");
-				}
-			}
-		} else if ($id>0) {
-			$q = "SELECT `file`, `filename` FROM `$table` WHERE id=$id";
-			$res = mq($q);
-			$data = mysql_fetch_array($res);
-			$path = $data['file'];
-			$filename = $data['filename'];
-			$data['filesize'] = (int)(filesize("../".$data['file']) / 1024 + 0.5);
-		}
-							
-		if (count($errors)>0) {
-			if ($id>0) {
-				$edit = true;
-			}
-			$data['id'] = $_POST['id'];
-			$data['title_ru'] = str_replace("\\'", "'", $_POST['title_ru']);
+// validation
+    if (empty($title_ru) || empty($title_en)) {
+        $errors[] = "Ð—Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð»Ð° Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿ÑƒÑÑ‚Ñ‹Ð¼!";
+    }
+    if (empty($text_ru) || empty($text_en) ) {
+			$errors[] = "Ð¢ÐµÐºÑÑ‚ Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð»Ð° Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿ÑƒÑÑ‚Ñ‹Ð¼!";
+    }
+
+    $path = "";
+    $filename = "";
+    if (isset($_FILES['file'])) {
+        if ($_FILES['file']['size']>0) {
+            if (count($errors)==0) {
+                $filename = $_FILES['file']['name'];
+                $tmpPath = $_FILES['file']['tmp_name'];
+                $path = "data/files/".time()."_".$filename;
+
+                move_uploaded_file($tmpPath, "../".$path) or die ("Can't move file!");
+            }
+        }
+    } else if ($id>0) {
+        $q = "SELECT `file`, `filename` FROM `$table` WHERE id=$id";
+        $res = mq($q);
+        $data = mysqli_fetch_array($res);
+        $path = $data['file'];
+        $filename = $data['filename'];
+        $data['filesize'] = (int)(filesize("../".$data['file']) / 1024 + 0.5);
+    }
+
+    if (count($errors)>0) {
+        if ($id>0) {
+            $edit = true;
+        }
+        $data['id'] = $_POST['id'];
+        $data['title_ru'] = str_replace("\\'", "'", $_POST['title_ru']);
 			$data['title_en'] = str_replace("\\'", "'", $_POST['title_en']);
 			$data['text_ru'] = str_replace("\\'", "'", $_POST['text_ru']);
-			$data['text_en'] = str_replace("\\'", "'", $_POST['text_en']);
-			$data['details_ru'] = str_replace("\\'", "'", $_POST['details_ru']);
+        $data['text_en'] = str_replace("\\'", "'", $_POST['text_en']);
+        $data['details_ru'] = str_replace("\\'", "'", $_POST['details_ru']);
 			$data['details_en'] = str_replace("\\'", "'", $_POST['details_en']);
-			$data['file'] = $path;
-			$data['filename'] = $filename;
-			$data['page_type'] = $_POST['page_type'];
-			$smarty->assign("data", $data);
+        $data['file'] = $path;
+        $data['filename'] = $filename;
+        $data['page_type'] = $_POST['page_type'];
+        $smarty->assign("data", $data);
 
-			$smarty->assign("errors", $errors);
-		} else {
-			// database modifications
-			if ($id>0) {
-				$q = "UPDATE `$table` SET
-	        	    	`title_ru`='$title_ru',
+        $smarty->assign("errors", $errors);
+    } else {
+// database modifications
+        if ($id>0) {
+            $q = "UPDATE `$table` SET
+`title_ru`='$title_ru',
 	          	    	`text_ru`='$text_ru',
 	          	    	`details_ru`='$details_ru',
 	        	    	`title_en`='$title_en',
-	          	    	`text_en`='$text_en',
-	          	    	`details_en`='$details_en',
-	          	    	`file`='$path',
-	          	    	`filename`='$filename',
-	          	    	`id_page_type`='$page_type',
-	            		`update_date`='$upd_date'
-  		              WHERE `id`='$id'";
-				mq($q);
-			} else {
-				$q = "INSERT INTO `$table` SET
-		            `id`='0',
-		            `title_ru`='$title_ru',
+`text_en`='$text_en',
+`details_en`='$details_en',
+`file`='$path',
+`filename`='$filename',
+`id_page_type`='$page_type',
+`update_date`='$upd_date'
+WHERE `id`='$id'";
+            mq($q);
+        } else {
+            $q = "INSERT INTO `$table` SET
+`id`='0',
+`title_ru`='$title_ru',
                     `text_ru`='$text_ru',
                     `details_ru`='$details_ru',
                     `title_en`='$title_en',
                     `text_en`='$text_en',
                     `details_en`='$details_en',
-		            `file`='$path',
-		            `filename`='$filename',
-		            `id_page_type`='$page_type',
-		            `update_date`='$upd_date'";
-				$res = mq($q);
-				$id = mysql_insert_id();
-			}		
-			$smarty->assign("message", "Ñîõðàíåíî!");	
-			$_GET['id'] = $id;
-		}
-	}
-	
-	if (isset($_GET['id'])) {
-		$id = addslashes($_GET['id']);
+`file`='$path',
+`filename`='$filename',
+`id_page_type`='$page_type',
+`update_date`='$upd_date'";
+            $res = mq($q);
+            $id = mysqli_insert_id();
+        }
+        $smarty->assign("message", "Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾!");
+        $_GET['id'] = $id;
+    }
+}
 
-		$q = "SELECT * FROM `$table` WHERE id=$id";
-		$res = mq($q);
-		$data = mysql_fetch_array($res);
-		$data['filesize'] = (int)(filesize("../".$data['file']) / 1024 + 0.5);
-		
-		if (isset($_GET['delfile'])) {
-			$q = "UPDATE `$table` SET `file`='', `filename`='' WHERE `id`='$id'";
-			mq($q);
-			if (is_file("../".$data['file'])) {
-				unlink("../".$data['file']);
-			}
-			unset($data['file']);
-			$smarty->assign("message", "Ôàéëîâîå âëîæåíèå óäàëåíî!");	
-		}
+if (isset($_GET['id'])) {
+    $id = addslashes($_GET['id']);
 
-		$smarty->assign("data", $data);
+    $q = "SELECT * FROM `$table` WHERE id=$id";
+    $res = mq($q);
+    $data = mysqli_fetch_array($res);
+    $data['filesize'] = (int)(filesize("../".$data['file']) / 1024 + 0.5);
 
-		$edit = true;
-	}
+    if (isset($_GET['delfile'])) {
+        $q = "UPDATE `$table` SET `file`='', `filename`='' WHERE `id`='$id'";
+        mq($q);
+        if (is_file("../".$data['file'])) {
+            unlink("../".$data['file']);
+        }
+        unset($data['file']);
+        $smarty->assign("message", "Ð¤Ð°Ð¹Ð»Ð¾Ð²Ð¾Ðµ Ð²Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¾!");
+    }
 
-	$res = mq("SELECT * FROM `page_type` ORDER BY `name_ru`");
-	$page_type = array();
-	while ($info = mysql_fetch_array($res)) {
-		$page_type[] = $info;
-	}
+    $smarty->assign("data", $data);
 
-	$smarty->assign("page_type", $page_type);
-	if ($edit) {
-		$smarty->assign("page_title", "Ðåäàêòèðîâàòü ìàòåðèàë");
-	} else {
-		$smarty->assign("page_title", "Íîâûé ìàòåðèàë");
-	}
+    $edit = true;
+}
 
-	$smarty->display("adm_page_edit.tpl");
+$res = mq("SELECT * FROM `page_type` ORDER BY `name_ru`");
+$page_type = array();
+while ($info = mysqli_fetch_array($res)) {
+    $page_type[] = $info;
+}
+
+$smarty->assign("page_type", $page_type);
+if ($edit) {
+    $smarty->assign("page_title", "Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð»");
+} else {
+    $smarty->assign("page_title", "ÐÐ¾Ð²Ñ‹Ð¹ Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð»");
+}
+
+$smarty->display("adm_page_edit.tpl");
 ?>

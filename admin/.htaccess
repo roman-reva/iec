@@ -1,4 +1,5 @@
 AuthType Basic
 AuthName "admin"
-AuthUserFile "/home/u2288/.htpasswds/public_html/admin/passwd"
+#AuthUserFile "/home/u2288/.htpasswds/public_html/admin/passwd"
+AuthUserFile "G:\OSPanel\domains\iec.loc\admin\passwd"
 require valid-user

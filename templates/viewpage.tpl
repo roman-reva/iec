@@ -2,19 +2,19 @@
 
 {if $page.title!=""}
 	{if $page.type!="infopage"}
-		Тип материала: <span style="color:#{$page.color}">{$page.type}</span><br />
-      	Обновлен: {$page.updated}<br /><br />
+		{if $lang eq 'ru'}РўРёРї РјР°С‚РµСЂРёР°Р»Р°{else}Data type{/if}: <span style="color:#{$page.color}">{$page.type}</span><br />
+		{if $lang eq 'ru'}РћР±РЅРѕРІР»РµРЅ{else}Updated{/if}: {$page.updated}<br /><br />
 	{/if}
-   <div class="pagetitle">{$page.title}</div>
+	<div class="pagetitle">{$page.title}</div>
 {/if}
 
 {$page.text}<br />
 
 {if $page.file!=""}
 	<table width="100%" align="center" cellspacing="0" cellpadding="0">
-    	<tr><td width="100%" height="1" background="images/line.gif"></td></tr>
-    </table><br />
-    <b>Скачать приклепленный файл:</b> <a href="{$page.file}">{$page.filename}</a> ({$page.filesize} Кб)<br /><br />
+		<tr><td width="100%" height="1" background="images/line.gif"></td></tr>
+	</table><br />
+	<b>{if $lang eq 'ru'}РЎРєР°С‡Р°С‚СЊ РїСЂРёРєР»РµРїР»РµРЅРЅС‹Р№ С„Р°Р№Р»{else}Download attached file{/if}:</b> <a href="{$page.file}">{$page.filename}</a> ({$page.filesize} В Р±)<br /><br />
 {/if}
 
 {include file="footer.tpl"}
