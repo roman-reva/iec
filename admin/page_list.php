@@ -97,8 +97,8 @@ if ($_SESSION['f_proj'] > 0) {
 	$res = mq($q);
 	
 	$data = array();
-	if (mysql_num_rows($res) > 0) {
-		while($info = mysql_fetch_array($res)) {
+	if (mysqli_num_rows($res) > 0) {
+		while($info = mysqli_fetch_array($res)) {
 			$data[] = $info;
 		}
 	}
@@ -106,11 +106,11 @@ if ($_SESSION['f_proj'] > 0) {
 	// fetching list of pages, which are not connected to any group
 	$res1 = mq("SELECT DISTINCT p.id AS id FROM page AS p ORDER BY p.id");
 	$undef_data_ids = array();
-	while ($info = mysql_fetch_array($res1)) {
+	while ($info = mysqli_fetch_array($res1)) {
 		$undef_data_ids[$info['id']] = $info['id'];
 	}
 	$res2 = mq("SELECT DISTINCT p.id AS id FROM page AS p, page2group AS p2g WHERE p2g.id_page = p.id ORDER BY p.id");
-	while ($info = mysql_fetch_array($res2)) {
+	while ($info = mysqli_fetch_array($res2)) {
 		unset($undef_data_ids[$info['id']]);
 	}
 // fetching list of pages, which are connected to any group
