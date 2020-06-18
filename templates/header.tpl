@@ -20,7 +20,9 @@
 			</form>
 		</div>
 	</div>
-	<div class="header"><img src="images/header_{$lang}.jpg" border="0" /></div>
+	<div class="header">
+		<img src="images/header_{$lang}.jpg" border="0" onerror="this.style.display='none'" style="max-width: 100%; max-height: 90px;"/>
+	</div>
 	<div class="headbotgrad"></div>
 	<div class="greyline"></div>
 	<table class="main" cellspacing="0" cellpadding="0">
